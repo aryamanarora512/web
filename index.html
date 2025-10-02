@@ -1,131 +1,298 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Aryaman Arora Portfolio</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body {
-            font-family: sans-serif;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(135deg, #f5f1eb 0%, #e8ddd4 50%, #ddd0c4 100%);
-            color: #333;
-        }
-        header {
-            text-align: center;
-            padding: 60px 20px 20px;
-        }
-        h1 {
-            font-size: 3rem;
-            font-weight: 200;
-        }
-        .tagline {
-            font-size: 1.25rem;
-            color: #555;
-        }
-        .projects {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            padding: 40px 20px;
-        }
-        .project {
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 16px;
-            overflow: hidden;
-            width: 300px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-        }
-        .project img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-        }
-        .project-details {
-            padding: 16px;
-        }
-        .project-title {
-            font-size: 1.2rem;
-            font-weight: bold;
-        }
-        .project-desc {
-            font-size: 0.95rem;
-            margin: 10px 0;
-        }
-        .tech {
-            font-size: 0.8rem;
-            color: #666;
-        }
-        footer {
-            text-align: center;
-            padding: 40px 20px;
-        }
-        a.button {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 12px 24px;
-            background: #333;
-            color: #fff;
-            border-radius: 24px;
-            text-decoration: none;
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AI & Film Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --black: #2b2b2b; /* deep dark for header */
+      --beige: #F5F5DC; /* from your sample */
+      --white: #ffffff;
+      --muted: #6b6b6b;
+      --radius: 12px;
+      --max-width: 1200px;
+    }
+
+    /* Basic reset */
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:var(--beige);
+      color:var(--black);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.4;
+    }
+
+    /* Header */
+    header{
+      background:var(--black);
+      color:var(--white);
+      position:sticky;
+      top:0;
+      z-index:40;
+      box-shadow:0 6px 18px rgba(0,0,0,0.25);
+    }
+    .nav-inner{
+      max-width:var(--max-width);
+      margin:0 auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:18px 20px;
+    }
+    .brand{
+      display:flex;gap:12px;align-items:center
+    }
+    .logo{
+      width:44px;height:44px;border-radius:8px;background:var(--beige);display:grid;place-items:center;color:var(--black);font-weight:700;font-size:16px
+    }
+    nav a{
+      color:var(--white);
+      text-decoration:none;
+      margin-left:18px;
+      font-weight:600;
+      letter-spacing:0.2px;
+    }
+    .cta{
+      background:transparent;border:1px solid rgba(255,255,255,0.12);padding:8px 12px;border-radius:8px;color:var(--white);text-decoration:none;font-weight:600
+    }
+
+    /* Page content */
+    .container{max-width:var(--max-width);margin:48px auto;padding:0 20px}
+
+    .hero{
+      display:grid;grid-template-columns:1fr 420px;gap:28px;align-items:center;margin-bottom:36px
+    }
+    .hero-text h1{
+      margin:0;font-size:48px;line-height:1.02;font-weight:800;color:var(--black)
+    }
+    .hero-text p{color:var(--muted);margin-top:12px;font-size:18px}
+    .hero-card{background:var(--white);border-radius:16px;padding:18px;box-shadow:0 8px 30px rgba(0,0,0,0.08)}
+
+    /* Filters */
+    .filters{display:flex;gap:12px;margin-bottom:22px}
+    .filter-btn{background:transparent;border:1px solid rgba(0,0,0,0.08);padding:8px 12px;border-radius:12px;cursor:pointer;font-weight:600}
+    .filter-btn.active{background:var(--black);color:var(--white);border-color:transparent}
+
+    /* Grid */
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:20px}
+    .card{
+      background:rgba(255,255,255,0.95);
+      border-radius:12px;
+      overflow:hidden;
+      box-shadow:0 6px 20px rgba(0,0,0,0.06);
+      display:flex;flex-direction:column;height:100%;border:1px solid rgba(0,0,0,0.04)
+    }
+    .thumb{height:160px;background:linear-gradient(135deg,#e9e9e9,#f6f6f6);display:block}
+    .card-body{padding:14px 14px 18px;display:flex;flex-direction:column;gap:8px;flex:1}
+    .card h3{margin:0;font-size:18px}
+    .meta{color:var(--muted);font-size:13px}
+    .tags{margin-top:auto;display:flex;gap:8px;flex-wrap:wrap}
+    .tag{font-size:12px;padding:6px 8px;border-radius:999px;border:1px solid rgba(0,0,0,0.06)}
+
+    /* Two-column project detail mock */
+    .project-hero{display:flex;gap:20px;align-items:stretch}
+    .project-hero .left{flex:1}
+    .project-hero .right{width:360px}
+
+    /* Footer */
+    footer{max-width:var(--max-width);margin:48px auto 80px;padding:0 20px;color:var(--muted)}
+
+    /* Small screens */
+    @media (max-width:900px){
+      .hero{grid-template-columns:1fr;}
+      nav a{display:none}
+    }
+
+    /* Accessibility: focus styles */
+    a:focus, button:focus{outline:3px solid rgba(0,0,0,0.12);outline-offset:3px}
+
+  </style>
 </head>
 <body>
-    <header>
-        <h1>Aryaman Arora</h1>
-        <div class="tagline">Creative Developer & Designer</div>
-        <p>Crafting digital experiences that blend innovative technology with thoughtful design.</p>
-    </header>
-    <section class="projects">
-        <div class="project">
-            <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=600&fit=crop" alt="E-Commerce Platform">
-            <div class="project-details">
-                <div class="project-title">E-Commerce Platform</div>
-                <div class="project-desc">Modern shopping experience with advanced filtering and seamless checkout</div>
-                <div class="tech">Tech: React, Node.js, MongoDB</div>
-            </div>
+  <header>
+    <div class="nav-inner">
+      <div class="brand">
+        <div class="logo">AI+</div>
+        <div style="color:var(--white)"><strong>Alex Roe</strong><div style="font-size:12px;color:rgba(255,255,255,0.75)">AI • Filmmaking</div></div>
+      </div>
+      <nav aria-label="Primary navigation">
+        <a href="#projects">Projects</a>
+        <a href="#about">About</a>
+        <a href="#contact" class="cta">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+
+      <section class="hero" aria-labelledby="hero-heading">
+        <div class="hero-text">
+          <h1 id="hero-heading">Creative portfolio — artificial intelligence & film</h1>
+          <p>Selected projects that combine code, research, and visual storytelling. Toggle the filters to browse AI projects or filmmaking work.</p>
+          <div style="margin-top:18px" class="filters" role="tablist">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="ai">AI Projects</button>
+            <button class="filter-btn" data-filter="film">Film Projects</button>
+          </div>
+
+          <div style="margin-top:28px;display:flex;gap:12px;align-items:center">
+            <a href="#contact" class="cta">Hire / Collaborate</a>
+            <a href="#" style="text-decoration:none;color:var(--black);font-weight:600">Download CV</a>
+          </div>
         </div>
-        <div class="project">
-            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop" alt="AI Dashboard">
-            <div class="project-details">
-                <div class="project-title">AI Dashboard</div>
-                <div class="project-desc">Analytics platform with real-time data visualization and machine learning insights</div>
-                <div class="tech">Tech: Python, TensorFlow, React</div>
+
+        <aside class="hero-card" aria-hidden="true">
+          <h4 style="margin:0 0 8px 0">Spotlight</h4>
+          <p style="margin:0 0 12px;color:var(--muted)">Recent — "Neural Storyboard" (AI-assisted storyboarding for short films)</p>
+          <div style="display:flex;gap:10px;align-items:center">
+            <div style="width:46px;height:46px;border-radius:8px;background:linear-gradient(135deg,#fefefe,#f0f0f0);display:grid;place-items:center;font-weight:700">AI</div>
+            <div style="flex:1">
+              <div style="font-weight:700">Neural Storyboard</div>
+              <div style="font-size:13px;color:var(--muted)">Prototype • Python • Open-source</div>
             </div>
-        </div>
-        <div class="project">
-            <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=800&h=600&fit=crop" alt="Mobile Banking App">
-            <div class="project-details">
-                <div class="project-title">Mobile Banking App</div>
-                <div class="project-desc">Secure financial management with biometric authentication and smart notifications</div>
-                <div class="tech">Tech: React Native, Firebase, Stripe</div>
+          </div>
+        </aside>
+      </section>
+
+      <section id="projects">
+        <h2 style="margin:0 0 12px 0">Projects</h2>
+        <p style="margin:0 0 18px;color:var(--muted)">Click a card to view a short summary and links.</p>
+
+        <div class="grid" id="projects-grid">
+          <!-- Example AI project -->
+          <article class="card" data-type="ai" tabindex="0">
+            <div class="thumb" aria-hidden="true"></div>
+            <div class="card-body">
+              <h3>Neural Storyboard</h3>
+              <div class="meta">AI • Python • Vision</div>
+              <p style="margin:8px 0 0;color:var(--muted);font-size:14px">Tool that converts script beats into shot-by-shot moodboards using generative models.</p>
+              <div class="tags">
+                <span class="tag">open-source</span>
+                <span class="tag">research</span>
+              </div>
             </div>
-        </div>
-        <div class="project">
-            <img src="https://images.unsplash.com/photo-1561736778-92e52a7769ef?w=800&h=600&fit=crop" alt="Creative Portfolio">
-            <div class="project-details">
-                <div class="project-title">Creative Portfolio</div>
-                <div class="project-desc">Interactive showcase for digital artists with 3D galleries and AR preview</div>
-                <div class="tech">Tech: Three.js, WebXR, GSAP</div>
+          </article>
+
+          <!-- Example Film project -->
+          <article class="card" data-type="film" tabindex="0">
+            <div class="thumb" style="background:linear-gradient(135deg,#ffeeda,#ffd8bf)" aria-hidden="true"></div>
+            <div class="card-body">
+              <h3>Short: "Paper Skies"</h3>
+              <div class="meta">Director • Cinematography</div>
+              <p style="margin:8px 0 0;color:var(--muted);font-size:14px">A 12-minute short exploring memory and urban landscapes. Festival selections: XYZ.</p>
+              <div class="tags">
+                <span class="tag">festival</span>
+                <span class="tag">director</span>
+              </div>
             </div>
-        </div>
-        <div class="project">
-            <img src="https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=800&h=600&fit=crop" alt="Task Management Suite">
-            <div class="project-details">
-                <div class="project-title">Task Management Suite</div>
-                <div class="project-desc">Collaborative workspace with advanced project tracking and team analytics</div>
-                <div class="tech">Tech: Vue.js, Express, PostgreSQL</div>
+          </article>
+
+          <!-- more sample cards -->
+          <article class="card" data-type="ai" tabindex="0">
+            <div class="thumb" aria-hidden="true"></div>
+            <div class="card-body">
+              <h3>Style Transfer Pipeline</h3>
+              <div class="meta">AI • Generative • Colab</div>
+              <p style="margin:8px 0 0;color:var(--muted);font-size:14px">Lightweight pipeline for painterly stylization of film stills.</p>
+              <div class="tags"><span class="tag">code</span></div>
             </div>
+          </article>
+
+          <article class="card" data-type="film" tabindex="0">
+            <div class="thumb" style="background:linear-gradient(135deg,#f6f6f6,#ffffff)" aria-hidden="true"></div>
+            <div class="card-body">
+              <h3>Documentary: "Signals"</h3>
+              <div class="meta">Producer • Editor</div>
+              <p style="margin:8px 0 0;color:var(--muted);font-size:14px">A feature short about radio artists and sound culture.</p>
+              <div class="tags"><span class="tag">editing</span></div>
+            </div>
+          </article>
+
+          <!-- placeholder cards to show layout -->
+          <article class="card" data-type="ai" tabindex="0">
+            <div class="thumb" aria-hidden="true"></div>
+            <div class="card-body">
+              <h3>Interactive Demo: Agent Lab</h3>
+              <div class="meta">Reinforcement • UX</div>
+              <p style="margin:8px 0 0;color:var(--muted);font-size:14px">Browser demo to visualize simple multi-agent behavior.</p>
+              <div class="tags"><span class="tag">demo</span></div>
+            </div>
+          </article>
+
+          <article class="card" data-type="film" tabindex="0">
+            <div class="thumb" style="background:linear-gradient(135deg,#ffdede,#fff5f5)" aria-hidden="true"></div>
+            <div class="card-body">
+              <h3>Music Video: "Echoes"</h3>
+              <div class="meta">Director • Colorist</div>
+              <p style="margin:8px 0 0;color:var(--muted);font-size:14px">Experimental music video blending archive footage and generative textures.</p>
+              <div class="tags"><span class="tag">color</span></div>
+            </div>
+          </article>
+
         </div>
-    </section>
-    <footer>
-        <p>Let's Create Something Amazing Together</p>
-        <p>Ready to bring your vision to life? I'm always excited to work on new projects.</p>
-        <a class="button" href="mailto:your.email@example.com">Get In Touch</a>
-    </footer>
+      </section>
+
+      <section id="about" style="margin-top:40px">
+        <h2>About</h2>
+        <div style="display:grid;grid-template-columns:1fr 320px;gap:24px;align-items:start;margin-top:14px">
+          <div>
+            <p style="margin-top:0;color:var(--muted)">I build tools at the intersection of machine learning and visual storytelling — writing production code, prototyping research ideas, and directing short films. I like small teams and long-form narratives.</p>
+            <ul style="padding-left:20px;color:var(--muted)">
+              <li>Languages: Python, JavaScript</li>
+              <li>Tools: PyTorch, FFmpeg, DaVinci Resolve</li>
+              <li>Availability: Open for commissions and collaborations</li>
+            </ul>
+          </div>
+          <aside class="hero-card">
+            <strong>Contact</strong>
+            <div style="margin-top:8px;color:var(--muted)">alex@example.com</div>
+            <div style="margin-top:12px"><a href="#contact" class="cta">Say hello</a></div>
+          </aside>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer>
+    <div style="max-width:var(--max-width);margin:0 auto;padding:0 20px">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:20px">
+        <div style="font-weight:700">Alex Roe</div>
+        <div style="color:var(--muted)">© <span id="year"></span> • Built with care</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // small JS: filtering + year injection
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    const buttons = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('#projects-grid .card');
+
+    buttons.forEach(btn => btn.addEventListener('click', (e)=>{
+      buttons.forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      const f = btn.dataset.filter;
+      cards.forEach(c=>{
+        if(f === 'all') { c.style.display='flex'; return }
+        c.style.display = (c.dataset.type === f) ? 'flex' : 'none';
+      })
+    }));
+
+    // keyboard accessibility: open card (placeholder behaviour)
+    cards.forEach(c => c.addEventListener('click', ()=>{ alert(c.querySelector('h3').textContent + '\n\nAdd links and case study here.'); }));
+    cards.forEach(c => c.addEventListener('keydown', (e)=>{ if(e.key === 'Enter') c.click(); }));
+  </script>
 </body>
 </html>
+
